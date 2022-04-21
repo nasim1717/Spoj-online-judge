@@ -1,0 +1,32 @@
+// PT07Y
+
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>ve[30000];
+int visit[30000];
+void dfs(int node){
+    visit[node]=1;
+    for(auto child:ve[node]){
+        if(visit[child]==0)
+            dfs(child);
+    }
+}
+int main(){
+    int i,n,m,u,v;
+    cin>>n>>m;
+    for(i=1; i<=m; i++){
+        cin>>u>>v;
+        ve[u].push_back(v);
+        ve[v].push_back(u);
+    }
+    int cc_cnt=0;
+    for(i=1; i<=n; i++){
+        if(visit[i]==0){
+            dfs(i),cc_cnt++;
+        }
+    }
+    if(cc_cnt==1 and n-1==m)
+        cout<<"YES\n";
+    else cout<<"NO\n";
+return 0;
+}
